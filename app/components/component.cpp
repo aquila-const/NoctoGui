@@ -1,16 +1,18 @@
 #include "imgui.h"
 #include "component.hpp"
-#include <string.h>
-#include <stdio.h>
+#include "toolset.hpp"
+#include <cstring>
+#include <cstdio>
 #include <implot.h>
+#include <string>
 
 //TODO: handle dynamic component attribution(generating)
 namespace Component {
-	void Sidebar_Init(const char* window_title)
+	void Sidebar_Init()
 	{
-		ImGui::Begin(window_title, 0);
-        if (ImGui::BeginTabBar("Plots")) {
-            
+		ImGui::Begin("Plots");
+        if (ImGui::BeginTabBar("Stats")) {
+
             if (ImGui::BeginTabItem("Magnitude")) {
                 static const double co = -3;
                 if (ImPlot::BeginPlot("##Bode1", ImVec2(-1, -1))) {
@@ -88,11 +90,19 @@ namespace Component {
                 }
                 ImGui::EndTabItem();
             }
-            
-           
+
+
             ImGui::EndTabBar();
         }
 
 		ImGui::End();
 	}
+    void MainView()
+    {
+
+        
+        Sidebar_Init();
+        Toolset::FlasherView();
+        
+    }
 }

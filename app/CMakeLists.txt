@@ -1,5 +1,5 @@
-set(EXE_SOURCES "${EXECUTABLE_NAME}.cpp" "cycle.cpp")
-set(EXE_HEADERS "cycle.hpp")
+set(EXE_SOURCES "${EXECUTABLE_NAME}.cpp" "cycle.cpp" "./components/component.cpp" "./components/toolset.cpp")
+set(EXE_HEADERS "cycle.hpp" "./components/component.hpp" "./components/toolset.hpp")
 add_executable(${EXECUTABLE_NAME} ${EXE_SOURCES} ${EXE_HEADERS})
 
 target_link_libraries(
@@ -7,6 +7,7 @@ target_link_libraries(
     PRIVATE impl
             ${LIBRARY_NAME}
             fmt::fmt
+            ${UDEV_LIBRARIES}
             cxxopts::cxxopts
             nlohmann_json::nlohmann_json)
 
