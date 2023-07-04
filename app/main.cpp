@@ -2,6 +2,7 @@
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 #include "imgui_impl_opengl3_loader.h"
+#include "implot.h"
 
 #if defined(IMGUI_IMPL_OPENGL_ES2)
 #include <GLES2/gl2.h>
@@ -71,6 +72,7 @@ int main(int, char **)
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
+    ImPlot::CreateContext();
     ImGui::StyleColorsDark();
 
     // Setup Platform/Renderer backends
@@ -86,6 +88,7 @@ int main(int, char **)
     // Cleanup
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
+    ImPlot::DestroyContext();
     ImGui::DestroyContext();
 
     glfwDestroyWindow(window);
@@ -96,5 +99,5 @@ int main(int, char **)
 
 void glfw_error_callback(int error, const char *description)
 {
-    fprintf(stderr, "Glfw Error %d: %s\n", error, description);
+   fprintf(stderr, "Glfw Error %d: %s\n", error, description);
 }
