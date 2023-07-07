@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.24)
 
 project(
-    "cyclops"
+    "nocto"
     VERSION 1.0.0
     LANGUAGES C CXX)
 
@@ -49,10 +49,10 @@ endif()
 
 # EXTERNAL LIBRARIES
 find_package(PkgConfig REQUIRED)
-pkg_check_modules(UDEV REQUIRED libudev)
-include_directories(
-  ${UDEV_INCLUDE_DIRS}
-)
+# pkg_check_modules(UDEV REQUIRED libudev)
+# include_directories(
+#   ${UDEV_INCLUDE_DIRS}
+# )
 FetchContent_Declare(
     nlohmann_json
     GIT_REPOSITORY https://github.com/nlohmann/json.git
@@ -73,12 +73,7 @@ FetchContent_Declare(
     GIT_TAG v3.0.0
     GIT_SHALLOW TRUE)
 FetchContent_MakeAvailable(cxxopts)
-FetchContent_Declare(
-    libusb
-    GIT_REPOSITORY https://github.com/libusb/libusb.git
-    GIT_TAG v1.0.26
-    GIT_SHALLOW FALSE)
-FetchContent_MakeAvailable(libusb)
+
 # SUB DIRECTORIES
 
 add_subdirectory(configured)
@@ -89,7 +84,7 @@ add_subdirectory(app)
 # INSTALL TARGETS
 
 install(
-    TARGETS ${EXECUTABLE_NAME}
+    TARGETS noctoui
     EXPORT ${LIBRARY_NAME}
     ARCHIVE DESTINATION lib
     LIBRARY DESTINATION lib

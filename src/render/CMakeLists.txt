@@ -1,5 +1,5 @@
 set(LIBRARY_SOURCES "render.cpp")
-set(LIBRARY_HEADERS "render.hpp" "../../app/components/component.hpp")
+set(LIBRARY_HEADERS "render.hpp")
 set(LIBRARY_INCLUDES "./" "${CMAKE_BINARY_DIR}/configured_files/include")
 
 add_library(${LIBRARY_NAME} STATIC ${LIBRARY_SOURCES} ${LIBRARY_HEADERS})
@@ -9,7 +9,6 @@ target_link_libraries(
     PRIVATE impl
             fmt::fmt
             cxxopts::cxxopts
-            
             nlohmann_json::nlohmann_json)
 
 target_set_warnings(

@@ -3,11 +3,7 @@
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 #include "imgui_impl_opengl3_loader.h"
-#include "components/component.hpp"
-#include "components/toolset.hpp"
 #include "cycle.hpp"
-using namespace Component;
-using namespace Toolset;
 
 
 void start_cycle()
@@ -34,7 +30,7 @@ void end_cycle(GLFWwindow *const window)
 }
 void initialize_docking()
 {
-     static bool opt_fullscreen = true;
+    static bool opt_fullscreen = true;
     static bool opt_padding = false;
     static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
 
@@ -69,7 +65,7 @@ void initialize_docking()
     // any change of dockspace/settings would lead to windows being stuck in limbo and never being visible.
     if (!opt_padding)
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
-    ImGui::Begin("DockSpace Demo", nullptr, window_flags);
+    ImGui::Begin("DockSpace Demo", nullptr, ImGuiWindowFlags_NoTitleBar);
     if (!opt_padding)
         ImGui::PopStyleVar();
 
@@ -129,8 +125,6 @@ void initialize_docking()
 
         ImGui::EndMenuBar();
     }
-
-    MainView();
     ImGui::End();
   
 }
@@ -147,7 +141,7 @@ void cycle_function(GLFWwindow *const window)
         ImGui::NewFrame();
 
         initialize_docking();
-        
+        render();
         ImGui::Render();
 
         end_cycle(window);

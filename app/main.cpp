@@ -25,7 +25,12 @@
 namespace fs = std::filesystem;
 
 static void glfw_error_callback(int error, const char *description);
+void get_resolution(int window_width, int window_height) {
+    const GLFWvidmode * mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 
+    window_width = mode->width;
+    window_height = mode->height;
+}
 int main(int, char **)
 {
     // Setup window
@@ -56,11 +61,17 @@ int main(int, char **)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 #endif
 
-    // Create window with graphics context
-    auto *window = glfwCreateWindow(static_cast<std::int32_t>(WINDOW_WIDTH),
-                                    static_cast<std::int32_t>(WINDOW_HEIGHT),
-                                    "Cyclops - Analyzer",
-                                    nullptr,
+    // Create window with graphics context fullscreen
+    int width_mm, height_mm;
+    int low_res_width = 700;
+    int low_res_height = 400;
+    int count;
+    get_resolution(width_mm, height_mm);
+    GLFWmonitor *primary_monitor = glfwGetPrimaryMonitor();
+    auto *window = glfwCreateWindow(static_cast<std::int32_t>(low_res_width),
+                                    static_cast<std::int32_t>(low_res_height),
+                                    "Nocto",
+                                    primary_monitor,
                                     nullptr);
     if (window == nullptr)
     {
@@ -78,7 +89,6 @@ int main(int, char **)
     // Setup Platform/Renderer backends
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init(glsl_version);
-
     auto &style = ImGui::GetStyle();
     style.Colors[ImGuiCol_TableBorderStrong] = ImVec4(1.0, 1.0, 1.0, 1.0);
     style.Colors[ImGuiCol_TableBorderLight] = ImVec4(1.0, 1.0, 1.0, 1.0);

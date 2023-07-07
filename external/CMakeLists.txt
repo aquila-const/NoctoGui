@@ -22,7 +22,7 @@ set(IMPLOT_SOURCES
 add_library(implot STATIC ${IMPLOT_SOURCES})
 target_include_directories(implot PUBLIC "implot")
 target_link_libraries(implot PUBLIC imgui)
-#find_library(libusb libusb-compat-0.1-0.1.7-9.fc37.x86_)
+
 ### ALL GRAPHICAL LIBS
 set(IMPL_SOURCES
     "imgui/backends/imgui_impl_glfw.h"
@@ -35,7 +35,6 @@ target_include_directories(impl PUBLIC "imgui/backends/")
 target_link_libraries(impl PUBLIC
     imgui
     implot
-    usb-1.0
     glfw)
 
 if(${ENABLE_LTO})
